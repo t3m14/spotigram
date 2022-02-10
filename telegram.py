@@ -4,7 +4,7 @@ from os import remove
 from spotdl import download_track, get_playlist
 
 
-TOKEN = "5070594813:AAFh-HwZzWRl2WxBIg_otH6llhAcZPS8Uj8"
+TOKEN = ""
 bot = TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
