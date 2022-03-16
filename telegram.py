@@ -2,13 +2,14 @@ from telebot import TeleBot, types
 from youtube_download import download_mp3
 from os import remove
 from spotdl import download_track, get_playlist
+from database import add_user
 
-
-TOKEN = ""
+TOKEN = "5070594813:AAFh-HwZzWRl2WxBIg_otH6llhAcZPS8Uj8"
 bot = TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
 def start_message(message):
+    add_user(message.chat.id)
     bot.send_message(message.chat.id, 'Привет, я музыкальный бот 🎸\n Что я умею:\n\n✨Могу найти твой трек✨\n\n🌿Могу найти твой плейлист спотифай🌿\n\nВсе треки беруться с открытого видеохостинга Youtube, иногда могут попадаться не правильные аудиодорожки\n\n Жми на /menu или напиши это для начала')
 
 
