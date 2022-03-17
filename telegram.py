@@ -2,11 +2,27 @@ from telebot import TeleBot, types
 from youtube_download import download_mp3
 from os import remove
 from spotdl import download_track, get_playlist
-from database import add_user
+from db import add_user, get_all_users
 
 TOKEN = "5070594813:AAFh-HwZzWRl2WxBIg_otH6llhAcZPS8Uj8"
 bot = TeleBot(TOKEN)
+# admin = 160407008
+admin = 836626044
 
+@bot.message_handler(commands=['set_advert'])
+def add_text(message):
+    if message.chat.id == admin:
+        msg = bot.send_message(message.chat.id, " Введите текст объявления...")
+        bot.register_next_step_handler(msg, add_photo)
+
+@bot.message_handler(content_types=['photo'], comands=["skip"])
+def add_photo(message):
+    text = message.text
+    msg = bot.send_message(message.chat.id, "Отправьте фото или напишите /skip для того чтобы оставить объявление без фото...")
+    bot.register_next_step_handler(msg, send_advert, text)
+def send_advert(message, text):
+    bot.send_message(message.chat.id, str(text))
+    bot.send_photo(message.chat.id, message.photo)
 @bot.message_handler(commands=['start', 'help'])
 def start_message(message):
     add_user(message.chat.id)
