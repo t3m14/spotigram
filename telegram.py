@@ -4,7 +4,7 @@ from os import remove
 from spotdl import download_track, get_playlist
 from db import add_user, get_all_users
 
-TOKEN = "5070594813:AAFh-HwZzWRl2WxBIg_otH6llhAcZPS8Uj8"
+TOKEN = ""
 bot = TeleBot(TOKEN)
 # admin = 160407008
 admin = 836626044
